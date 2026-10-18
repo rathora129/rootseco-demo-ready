@@ -1,0 +1,25 @@
+import Link from "next/link";
+import { categories, products, solutions, blogPosts } from "@/data/catalog";
+import { ProductGrid, CategoryCard, SolutionCard, BlogCard, QuoteBanner } from "@/components/Cards";
+import { SectionHeading } from "@/components/Site";
+
+const A = (name) => `/images/client/${name}`;
+
+export default function HomePage() {
+  const featured = products.filter(p => p.featured).slice(0, 8);
+  return <main>
+    <section className="home-hero botanical-hero">
+      <div className="hero-copy"><span className="eyebrow">THOUGHTFUL CORPORATE GIFTING</span><h1>Make every gift<br/><em>mean something.</em></h1><p>Curated gifting ideas for employees, clients and partners — with product choices, presentation and brand details shaped around your brief.</p><div className="hero-actions"><Link className="btn btn-primary" href="/products">Explore the catalogue ↗</Link><Link className="btn btn-outline" href="/quote">Plan a bulk order</Link></div><div className="hero-points"><span>✓ Bulk gifting enquiries</span><span>✓ Customisation to be confirmed</span><span>✓ Gifts for business occasions</span></div></div>
+      <div className="hero-art hero-art-organic"><img src={A("premium-wooden-gift-set.jpg")} alt="Premium gift set from the RootsEco product references"/><div className="floating-note"><small>THE ROOTSECO APPROACH</small><strong>Thoughtful by design.<br/>Memorable by nature.</strong></div><div className="hero-stamp">GIFTS<br/>WITH<br/>MEANING</div><span className="leaf-orbit leaf-orbit-one"/><span className="leaf-orbit leaf-orbit-two"/></div>
+      <span className="hero-petal hero-petal-one"/><span className="hero-petal hero-petal-two"/>
+    </section>
+    <div className="benefit-strip botanical-benefits"><div><span>✳</span><b>Curated gift ideas</b><small>For business occasions</small></div><div><span>♧</span><b>Brand-ready options</b><small>Subject to product</small></div><div><span>▧</span><b>Bulk order support</b><small>From brief to quote</small></div><div><span>♡</span><b>Personal touch</b><small>Gifts that build connection</small></div></div>
+    <section className="section botanical-section"><SectionHeading eyebrow="EXPLORE COLLECTIONS" title="Find the right gift" emphasis="for every moment." description="Browse real product references supplied for RootsEco and discover a starting point for your next corporate gifting brief." link="/categories"/><div className="category-grid">{categories.slice(0,4).map(c=><CategoryCard key={c.slug} category={c}/>)}</div><div className="section-bottom-link"><Link className="btn btn-outline" href="/categories">Explore all categories ↗</Link></div></section>
+    <section className="section section-soft botanical-soft"><SectionHeading eyebrow="PRODUCT INSPIRATION" title="Gifts to make" emphasis="an impression." description="Product photos supplied for this demo. Final model, contents, pricing, MOQ and customisation are confirmed on enquiry." link="/products"/><ProductGrid items={featured}/></section>
+    <section className="occasion-band"><div className="occasion-copy"><span className="eyebrow">FOR THE MOMENTS THAT MATTER</span><h2>From everyday appreciation to <em>festive celebrations.</em></h2><p>Explore gift sets, diaries, drinkware, travel accessories and festive hampers for teams, clients and business partners.</p><Link className="btn btn-primary" href="/solutions">Explore gifting solutions ↗</Link></div><div className="occasion-images"><img className="occasion-main" src={A("festive-diwali-hamper.jpg")} alt="Festive gift set reference"/><img className="occasion-small" src={A("custom-diary-set.jpg")} alt="Diary gift set reference"/><span className="occasion-petal"/></div></section>
+    <section className="section botanical-section"><SectionHeading eyebrow="MADE FOR YOUR BUSINESS" title="Gifting solutions" emphasis="for real occasions." description="Start with the occasion. We'll help you define products, quantity, budget and branding requirements." link="/solutions"/><div className="solution-grid">{solutions.map(s=><SolutionCard key={s.slug} solution={s}/>)}</div></section>
+    <section className="story-band botanical-story"><div className="story-image"><img src={A("welcome-kit.jpg")} alt="Welcome kit product photo supplied for RootsEco"/></div><div className="story-copy"><span className="eyebrow">A LITTLE MORE THOUGHT GOES A LONG WAY</span><h2>It’s not just a gift.<br/><em>It’s how you make people feel.</em></h2><p>Great corporate gifting starts with understanding the moment. Explore practical gift ideas, presentation styles and branding possibilities, then confirm the right combination for your team or clients.</p><Link className="text-link" href="/about">Get to know RootsEco ↗</Link></div></section>
+    <section className="section section-soft botanical-soft"><SectionHeading eyebrow="FROM THE GIFTING DESK" title="Ideas to help you" emphasis="plan better." description="Useful starting points for your next gifting project." link="/blog"/><div className="blog-grid">{blogPosts.map(p=><BlogCard key={p.slug} post={p}/>)}</div></section>
+    <QuoteBanner/>
+  </main>;
+}
